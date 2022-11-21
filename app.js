@@ -6,7 +6,7 @@ const yt = require("yt-converter");
 const timeout = require('connect-timeout');
 const ytdl = require('ytdl-core');
 const fs = require('fs');
-const  YoutubeMp3Downloader = require("youtube-mp3-downloader");
+const YoutubeMp3Downloader = require("youtube-mp3-downloader");
 
 //create de express server
 const app = express();
@@ -93,18 +93,23 @@ app.post("/convert-mp3", async (req, res) => {
 })
 app.post("/descargar", async (req, res) => {
     const id = req.body.codSong; //lo que estara en el buscador
-    
-    DownloadMp3(cancionesLinks[id], cancionesTitle[id])
-    if(__dirname + cancionesTitle){
-        return res.redirect("/")
-    }
 
+    console.log(cancionesLinks[id]);
+    const fetchAPI1 = await fetch(`https://youtube-mp36.p.rapidapi.com/dl?id=${cancionesLinks[id]}`, {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-key": "5c0490ddb0mshce6adbb2d9a28d8p131bdejsn9c85998ac3da",
+            "x-rapidapi-host": "youtube-mp36.p.rapidapi.com"
+        }
+    });
+    const fetchResponse1 = await fetchAPI1.json();
+    const enlaceDescarga = fetchResponse1["link"]
+
+    if (fetchResponse1.status === 'ok')
+        return res.redirect(`${enlaceDescarga}`)
+    
 
 })
-const os = require("os");
-
-// check the available memory
-const userHomeDir = os.homedir();
 
 
 //start the server
@@ -113,14 +118,15 @@ app.listen(PORT, () => {
 })
 
 function DownloadMp3(videoId, titulo) {
-    listo = false
-    yt.convertAudio({
-        url: `https://www.youtube.com/watch?v=${videoId}`,
-        itag: 140,
-        directoryDownload: `${userHomeDir}\\Downloads`,
-        title: titulo
-        
-    })
+    // yt.convertAudio({
+    //     url: `https://www.youtube.com/watch?v=${videoId}`,
+    //     itag: 140,
+    //     directoryDownload: `${userHomeDir}\\Downloads`,
+    //     title: titulo
+    // })
+
+
+
 }
 
 
