@@ -3,10 +3,10 @@ const express = require('express');
 const fetch = require('node-fetch');
 require('dotenv').config();
 const yt = require("yt-converter");
-
-
-
-
+const timeout = require('connect-timeout');
+const ytdl = require('ytdl-core');
+const fs = require('fs');
+const  YoutubeMp3Downloader = require("youtube-mp3-downloader");
 
 //create de express server
 const app = express();
@@ -75,7 +75,7 @@ app.post("/convert-mp3", async (req, res) => {
     return res.render("index", {
         comprobar: true,
         success: true,
-        song_id1: 0, song_title1: cancionesTitle[0], song_image1: cancionesImage[0], 
+        song_id1: 0, song_title1: cancionesTitle[0], song_image1: cancionesImage[0],
         song_id2: 1, song_title2: cancionesTitle[1], song_image2: cancionesImage[1],
         song_id3: 2, song_title3: cancionesTitle[2], song_image3: cancionesImage[2],
         song_id4: 3, song_title4: cancionesTitle[3], song_image4: cancionesImage[3],
@@ -101,6 +101,10 @@ app.post("/descargar", async (req, res) => {
 
 
 })
+const os = require("os");
+
+// check the available memory
+const userHomeDir = os.homedir();
 
 
 //start the server
@@ -113,8 +117,10 @@ function DownloadMp3(videoId, titulo) {
     yt.convertAudio({
         url: `https://www.youtube.com/watch?v=${videoId}`,
         itag: 140,
-        directoryDownload: __dirname,
+        directoryDownload: `${userHomeDir}\\Downloads`,
         title: titulo
+        
     })
 }
+
 

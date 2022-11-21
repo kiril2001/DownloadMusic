@@ -36,18 +36,13 @@ h4,
 p {
   color: #fff;
 }
-  .resultados {
+   .resultados {
     display: grid;
     grid-template-columns: 1fr;
-  }
-@media (max-width: 480px) {
-  .resultados {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 2rem;
   }
 
-}
+
 
 .resultados article {
   padding: 1rem;
@@ -58,7 +53,7 @@ p {
 }
 
 .header-titulo {
-  font-size: 6rem;
+  font-size: 4rem;
 }
 
 .search {
@@ -73,6 +68,7 @@ p {
   border-bottom-left-radius: 2rem;
   color: gray;
   background-color: transparent;
+  min-width: 30rem;
 }
 .boton-busqueda {
   background-color: transparent;
@@ -98,4 +94,5 @@ p {
 }
 .success img {
   border-radius: 2rem;
+  max-width: 30rem;
 }
