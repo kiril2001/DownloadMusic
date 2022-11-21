@@ -98,8 +98,8 @@ app.post("/descargar", async (req, res) => {
     const fetchAPI1 = await fetch(`https://youtube-mp36.p.rapidapi.com/dl?id=${cancionesLinks[id]}`, {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "5c0490ddb0mshce6adbb2d9a28d8p131bdejsn9c85998ac3da",
-            "x-rapidapi-host": "youtube-mp36.p.rapidapi.com"
+            "x-rapidapi-key": process.env.API_KEY2,
+            "x-rapidapi-host": process.env.API_HOST2
         }
     });
     const fetchResponse1 = await fetchAPI1.json();
