@@ -1,22 +1,12 @@
 //requiered packages
-const { render } = require('ejs');
 const express = require('express');
 const fetch = require('node-fetch');
 require('dotenv').config();
-const puppeteer = require('puppeteer');
-//const cors = require('cors');
-//const ytdl = require('ytdl-core');
 const yt = require("yt-converter");
-const axios = require("axios");
 
 
 
 
-
-
-//Declarar funciones de otra pagina
-const fn = require('./fn');
-const { MostrarResultados, DownloadMp3 } = require('./fn');
 
 //create de express server
 const app = express();
@@ -117,4 +107,14 @@ app.post("/descargar", async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server starded on port ${PORT}`);
 })
+
+function DownloadMp3(videoId, titulo) {
+    listo = false
+    yt.convertAudio({
+        url: `https://www.youtube.com/watch?v=${videoId}`,
+        itag: 140,
+        directoryDownload: __dirname,
+        title: titulo
+    })
+}
 

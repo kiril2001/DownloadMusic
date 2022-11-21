@@ -33,7 +33,7 @@
    
     <section id="resultados" class="container resultados">
 
-
+      <% if(typeof success != "undefined" && success) {%> 
         
       <article class="container">
         <form action="/descargar" method="POST">
@@ -137,7 +137,7 @@
         </div>
         </form>
       </article>
-
+      <% } %>
     </section>
 
   </main>  
